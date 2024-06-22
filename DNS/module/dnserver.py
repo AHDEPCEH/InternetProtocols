@@ -3,7 +3,7 @@ from dnslib import DNSRecord, RR, QTYPE, A, AAAA, NS, PTR, DNSError
 import socket
 import time
 
-
+#Добавить парсинг дополнительных секций от какого-то сервера, так как гугл не добавляет эти данные в пакет
 class DNServer:
     main_server = "8.8.8.8"
 
@@ -16,7 +16,7 @@ class DNServer:
 
     def run(self):
         while True:
-            data, addr = self.sock.recvfrom(1024)
+            data, addr = self.sock.recvfrom(512)
             dns_request = DNSRecord.parse(data)
             q_name = dns_request.q.qname
             self.q_type = dns_request.q.qtype
